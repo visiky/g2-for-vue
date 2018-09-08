@@ -1,9 +1,9 @@
 
 <template>
-  <div class="g2-chart"/>
+  <div class="g2-vchart"/>
 </template>
 <style>
-.g2-chart {
+.g2-vchart {
   width: 100%;
   height: 100%;
 }

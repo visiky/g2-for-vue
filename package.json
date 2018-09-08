@@ -1,12 +1,12 @@
 {
   "name": "g2-for-vue",
-  "version": "0.1.0",
+  "version": "0.3.0",
   "description": "G2 Charts for Vue.js",
-  "main": "dist/g2-for-vue.common.js",
+  "main": "dist/G2VChart.umd.min.js",
   "scripts": {
-    "demo": "vue-cli-service serve --open --fix",
-    "build": "vue-cli-service build --target lib --name g2-for-vue",
-    "lint": "vue-cli-service "
+    "dev": "cross-env NODE_ENV=development vue-cli-service serve --open --fix",
+    "build": "cross-env NODE_ENV=production vue-cli-service build --target lib --name G2VChart src/index.js",
+    "lint": "vue-cli-service lint"
   },
   "keywords": [
     "G2",
@@ -19,14 +19,15 @@
     "url": "https://github.com/Me-Momo/g2-for-vue.git"
   },
   "dependencies": {
-    "@antv/g2": "^3.2.7",
-    "vue": "^2.5.17"
+    "@antv/g2": "^3.2.7"
   },
   "devDependencies": {
+    "vue": "^2.5.17",
     "@vue/cli-plugin-babel": "^3.0.1",
     "@vue/cli-plugin-eslint": "^3.0.1",
     "@vue/cli-service": "^3.0.1",
     "@vue/eslint-config-standard": "^3.0.1",
+    "cross-env": "^5.2.0",
     "vue-template-compiler": "^2.5.17"
   },
   "browserslist": [

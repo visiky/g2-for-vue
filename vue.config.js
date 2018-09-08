@@ -1,20 +1,28 @@
-const config = require('./config')
+const path = require('path')
+const configs = require('./config')
+
+const config = process.env.NODE_ENV === 'production' ? configs.build : configs.dev
 
 module.exports = {
-  productionSourceMap: config.build.productionSourceMap,
+  productionSourceMap: configs.build.productionSourceMap ? '#source-map' : false,
   // https://cli.vuejs.org/config/#baseurl
-  baseUrl: process.env.NODE_ENV === 'production'
-    ? config.build.assetsPublicPath
-    : config.dev.assetsPublicPath,
+  baseUrl: config.assetsPublicPath,
   // https://cli.vuejs.org/config/#outputdir
-  outputDir: config.build.assetsRoot,
+  outputDir: config.outputPath,
   pages: {
-    // 默认进入demo
     index: {
-      // entry for the page
-      entry: './demo/main.js',
-      // the source template
-      template: 'public/index.html'
+      entry: path.resolve(__dirname, './src/index.js'),
+      template: './public/index.html'
+    },
+    demo: {
+      entry: path.resolve(__dirname, './demo/index.js'),
+      template: './demo/index.html'
+    }
+  },
+  configureWebpack: {
+    // https://cli.vuejs.org/guide/build-targets.html#vue-vs-js-ts-entry-files
+    output: {
+      libraryExport: 'default'
     }
   }
 }

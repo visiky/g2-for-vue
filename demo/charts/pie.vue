@@ -1,6 +1,6 @@
 <template>
   <div class='pie-chart'>
-    <chart
+    <G2VChart
       ref="pie"
       :height="chartHeight"
       :plotCfg="piePlotCfg"
@@ -12,11 +12,11 @@
   </div>
 </template>
 <script>
-import G2Chart from '../../src/components/G2Chart.vue'
+import G2VChart from '../../src'
 
 export default {
   components: {
-    chart: G2Chart
+    G2VChart
   },
   data () {
     return {
@@ -59,7 +59,6 @@ export default {
       chart.tooltip(false)
       return chart
     },
-
     addPieGuide (chart, chartData) {
       // 辅助文本
       let diffVal = 0
