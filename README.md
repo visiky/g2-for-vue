@@ -28,3 +28,4 @@ npm run lint
 ## 2018.09.08
 - 初始化项目
 - [ ] 分包引入G2,目前会将整个G2引入,打包后的common.js大小为1542.79 kb,压缩后的大小为327.42 kb
+- [ ] `run lint` before `git push`

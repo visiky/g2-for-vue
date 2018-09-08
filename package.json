@@ -16,12 +16,10 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/Me-Momo/g2-for-vue.git"
   },
   "dependencies": {
-    "@antv/g2": "^3.2.7"
-  },
-  "peerDependencies": {
+    "@antv/g2": "^3.2.7",
     "vue": "^2.5.17"
   },
   "devDependencies": {
