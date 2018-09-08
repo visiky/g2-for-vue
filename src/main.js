@@ -1,8 +1,2 @@
-import Vue from 'vue'
-import App from './App.vue'
-
-Vue.config.productionTip = false
-
-new Vue({
-  render: h => h(App)
-}).$mount('#app')
+import G2Chart from './components/G2Chart.vue'
+export default G2Chart

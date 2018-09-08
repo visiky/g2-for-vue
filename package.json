@@ -1,13 +1,27 @@
 {
-  "name": "demo",
+  "name": "g2-for-vue",
   "version": "0.1.0",
-  "private": true,
+  "description": "G2 Charts for Vue.js",
+  "main": "dist/g2-for-vue.common.js",
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "demo": "vue-cli-service serve --open --fix",
+    "build": "vue-cli-service build --target lib --name g2-for-vue",
+    "lint": "vue-cli-service "
+  },
+  "keywords": [
+    "G2",
+    "Vue.js"
+  ],
+  "author": "Kasmine (xinming002@gmail.com)",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": ""
   },
   "dependencies": {
+    "@antv/g2": "^3.2.7"
+  },
+  "peerDependencies": {
     "vue": "^2.5.17"
   },
   "devDependencies": {
@@ -16,5 +30,10 @@
     "@vue/cli-service": "^3.0.1",
     "@vue/eslint-config-standard": "^3.0.1",
     "vue-template-compiler": "^2.5.17"
-  }
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not ie <= 8"
+  ]
 }
