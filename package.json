@@ -2,7 +2,7 @@
   "name": "g2-for-vue",
   "version": "0.3.0",
   "description": "G2 Charts for Vue.js",
-  "main": "dist/G2VChart.umd.min.js",
+  "main": "lib/index.js",
   "scripts": {
     "dev": "cross-env NODE_ENV=development vue-cli-service serve --open --fix",
     "build": "cross-env NODE_ENV=production vue-cli-service build --target lib --name G2VChart src/index.js",

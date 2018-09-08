@@ -7,10 +7,10 @@ Built upon [G2](https://antv.alipay.com/zh-cn/g2/3.x/api/index.html) `v3.2.7`+ a
 ## Install
 
 ### Manual
-download `dist/G2VChart.umd.js` and include it in your HTML file,just like what `dist/demo.html` does:
+download `lib/G2VChart.js` and include it in your HTML file
 
 ```html
-<script src="path/to/vue-echarts/dist/G2VChart.umd.js"></script>
+<script src="path/to/g2-for-vue/lib/index.js"></script>
 ```
 
 The component is exposed as `window.G2VChart`.
@@ -164,6 +164,7 @@ npm run demo
 ## Plan
 
 - [ ] 分包引入G2,目前会将整个G2引入,打包后的common.js大小为1542.79 kb,压缩后的大小为327.42 kb
+  - [ ] use G2 as `exterval`！
 ```js
 import G2 from '@antv/g2/src/core.js'
 
@@ -189,3 +190,15 @@ require('./interaction/index');
 - [ ] use `resize-detector`
 - [ ] add more examples
 - [ ] `run lint` before `git push`
+
+
+Version|File|Size|Gzipped
+0.3.0 | dist/G2VChart.umd.min.js | 634.35 kb  | 176.48 kb
+0.3.0 | dist/G2VChart.umd.js     | 1536.26 kb | 326.48 kb
+
+
+=== Tarball Details ===
+version:       0.3.0
+package size:  854.3 kB
+unpacked size: 3.9 MB
+total files:   22
