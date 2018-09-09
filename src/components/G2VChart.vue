@@ -10,13 +10,17 @@
 </style>
 <script>
 import G2 from '@antv/g2'
+import { addListener, removeListener } from 'resize-detector'
+import debounce from 'debounce'
+import EVENTS from './Events.js'
 
 export default {
   props: {
-    width: Number,
-    height: {
-      type: Number,
-      default: 300
+    // will ignore the props of Width and Height;
+    // using the boxSize of $el
+    autoResize: {
+      type: Boolean,
+      default: false,
     },
     plotCfg: {
       type: Object,
@@ -40,15 +44,11 @@ export default {
   },
 
   watch: {
-    width: function (newVal, oldVal) {
-      if (newVal !== oldVal) {
-        this.chart.changeSize(newVal, this.height)
-      }
+    width: (newVal, oldVal) => {
+      return this.delegateMethod('changeWidth', newVal);
     },
-    height: function (newVal, oldVal) {
-      if (newVal !== oldVal) {
-        this.chart.changeSize(this.width, newVal)
-      }
+    height: (newVal, oldVal) => {
+      return this.delegateMethod('changeHeight', newVal);
     }
   },
 
@@ -68,14 +68,15 @@ export default {
   },
 
   mounted () {
-    this.initChart()
+    this.init()
   },
 
-  // activated () {
-  //   if (this.autoResize) {
-  //     this.chart && this.chart.resize()
-  //   }
-  // },
+  activated () {
+    console.log('activated')
+    if (this.autoResize) {
+      this.resize()
+    }
+  },
 
   beforeDestory () {
     if (this.chart) {
@@ -85,13 +86,40 @@ export default {
   },
 
   methods: {
-    initChart () {
-      const self = this
+    getArea () {
+      return this.$el.offsetWidth * this.$el.offsetHeight
+    },
+    getBox () {
+      return { width: this.$el.offsetWidth, height: this.$el.offsetHeight }
+    },
+    resize() {
+      const { width, height } = this.getBox();
+      return this.delegateMethod('changeSize', width, height);
+    },
+    getDataURL () {
+      return this.delegateMethod('toDataURL')
+    },
+    downloadImage(name) {
+      return this.delegateMethod('downloadImage', name)
+    },
+    delegateMethod (name, ...args) {
+      if (!this.chart) {
+        this.init()
+      }
+      return this.chart[name](...args)
+    },
+    delegateGet (name, method) {
+      if (!this.chart) {
+        this.init()
+      }
+      return this.chart[method]()
+    },
+    init () {
+      const { width, height } = this.getBox();
       let chart = new G2.Chart({
-        container: self.$el,
-        height: self.height,
-        width: self.width,
-        forceFit: !self.width,
+        container: this.$el,
+        height,
+        width,
         ...Object.assign(this.defaultPlotCfg, this.plotCfg)
       })
       if (this.createChart) {
@@ -99,15 +127,64 @@ export default {
       } else {
         // TODO 默认创建
       }
+
+      // autoResize Detector
+      if (this.autoResize) {
+        this.__resizeHandler = debounce(() => {
+          // expose a resize event
+          this.$emit('resize')
+          this.resize();
+        }, 200)
+        addListener(this.$el, this.__resizeHandler)
+      }
+
       chart.source(this.chartData)
       this.addGuide(chart, this.chartData)
       chart.render()
+
+      // expose G2 Chart events as custom events
+      EVENTS.forEach(event => {
+        chart.on(event, evt => {
+          this.$emit(event, evt)
+        })
+      })
+
+      Object.defineProperties(this, {
+        // Only recalculated when accessed from JavaScript.
+        // Won't update DOM on value change because getters
+        // don't depend on reactive values
+        width: {
+          configurable: true,
+          get: () => {
+            return this.getBox().width
+          }
+        },
+        height: {
+          configurable: true,
+          get: () => {
+            return this.getBox().height
+          }
+        }
+      })
+
       this.chart = chart
+    },
+    repaint () {
+      this.delegateMethod('repaint')
+    },
+    clear () {
+      this.delegateMethod('clear')
+    },
+    destroy () {
+      if (this.autoResize) {
+        removeListener(this.$el, this.__resizeHandler)
+      }
+      this.delegateMethod('destroy')
     },
     refresh () {
       if (this.chart) {
-        this.chart.destroy()
-        this.initChart()
+        this.destroy()
+        this.init()
       }
     }
   }
