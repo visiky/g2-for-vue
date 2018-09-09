@@ -75,11 +75,11 @@ export default {
     }
   },
   mounted() {
-    this.vchart = this.$refs['g2-vchart'];
-  },
+    this.vchart = this.$refs['g2-vchart']
+  }
 }
 </script>
-<style>
+<style lang='less'>
 html, body {
   margin: 0;
   padding: 0;
@@ -88,18 +88,18 @@ html, body {
   width: 90vw;
   height: 80vh;
   margin: 1vh 5vw 0;
-}
-.demo .btn {
-  width: 80px;
-  height: 30px;
-  line-height: 30px;
-  background: #03A9F4;
-  border-radius: 5px;
-  color: #fff;
-  font-size: 16px;
-  text-align: center;
-  cursor: pointer;
-  margin: 5px 12px;
-  float: right;
+  .btn {
+    width: 80px;
+    height: 30px;
+    line-height: 30px;
+    background: #03A9F4;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 16px;
+    text-align: center;
+    cursor: pointer;
+    margin: 5px 12px;
+    float: right;
+  }
 }
 </style>

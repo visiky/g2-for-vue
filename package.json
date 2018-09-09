@@ -1,11 +1,12 @@
 {
   "name": "g2-for-vue",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "G2 Charts for Vue.js",
   "main": "lib/index.js",
   "scripts": {
     "dev": "cross-env NODE_ENV=development vue-cli-service serve --open --fix",
-    "build": "cross-env NODE_ENV=production vue-cli-service build --target lib --name tmp src/index.js && rimraf lib/* && cp ./dist/tmp.umd.min.js ./lib/index.js && rimraf dist",
+    "build": "cross-env NODE_ENV=production vue-cli-service build --target lib --name tmp src/index.js && cp ./dist/tmp.umd.min.js ./lib/index.js",
+    "build:clean": "cross-env NODE_ENV=production vue-cli-service build --target lib --name tmp src/index.js && rimraf lib/* && cp ./dist/tmp.umd.min.js ./lib/index.js && rimraf dist",
     "lint": "vue-cli-service lint",
     "pub": "sh ./publish.sh"
   },
@@ -30,10 +31,16 @@
     "@vue/cli-service": "^3.0.1",
     "@vue/eslint-config-standard": "^3.0.1",
     "cross-env": "^5.2.0",
+    "less": "^3.8.1",
+    "less-loader": "^4.1.0",
     "rimraf": "^2.6.2",
     "vue": "^2.5.17",
     "vue-template-compiler": "^2.5.17"
   },
+  "files": [
+    "components",
+    "lib"
+  ],
   "browserslist": [
     "> 1%",
     "last 2 versions",

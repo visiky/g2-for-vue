@@ -24,5 +24,13 @@ module.exports = {
     output: {
       libraryExport: 'default'
     }
+  },
+  css: {
+    extract: false,
+    loaderOptions: {
+      // pass options to less-loader
+      less: {
+      }
+    }
   }
 }

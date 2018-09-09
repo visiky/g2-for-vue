@@ -1,4 +1,4 @@
-npm run build
+npm run build:clean
 
 cp -r ./src/* .
 rm -rf index.js

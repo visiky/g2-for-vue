@@ -1,6 +1,7 @@
 0.3.1
 * add `resize-detector`
-
+* add more `G2.Chart Methods` support
+* minify publish files
 
 0.3.0
 * Fix usage in README

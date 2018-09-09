@@ -1,7 +1,7 @@
 /**
  * @file enumeration G2 Charts events
  */
-const EVENTS = [
+module.exports = [
   // basic canvas events
   'mousedown',
   'mousemove',
@@ -24,5 +24,3 @@ const EVENTS = [
   'tooltip:change'
   // TODO any other events,like shape*basic, components*basic
 ]
-
-export default EVENTS
