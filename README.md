@@ -128,16 +128,42 @@ See more examples [here](https://github.com/Me-Momo/g2-for-vue/tree/master/demo/
 
 ### Props
 
-- `height`
-- `width`
-- `plotCfg`
-- `chartData`
-- `createChart`
-- `addGuide`
+* `autoResize` (default: false)
+    This prop indicates G2 Chart instance should be resized automatically whenever its root is resized
+
+* `plotCfg`
+* `chartData`
+* `createChart`
+* `addGuide`
 
 ### Computed
 
-TODO
+* `width` **[readonly]**
+
+  Used to retrieve the current width of the G2Chart instance.
+
+* `height` **[readonly]**
+
+  Used to retrieve the current height of the G2Chart instance.
+
+
+##### Usages
+```html
+<g2-vchart
+  ref="g2-vchart"
+  autoResize
+  @resize="onResize"
+/>
+```
+```js
+onResize() {
+  const g2VChart = this.$refs['g2-vchart'];
+  const width = g2VChart.width;
+  const height = g2VChart.height;
+  console.log('onResize:width:%d, height:%d',  width, height)
+}
+```
+
 
 ### Methods
 
@@ -149,8 +175,48 @@ TODO
 
 ### Events
 
-TODO
+G2VChart support the following events:
 
+**basic canvas events**
+* `mousedown`
+* `mousemove`
+* `mouseleave`
+* `mouseup`
+* `click`
+* `dblclick`
+* `touchstart`
+* `touchmove`
+* `touchend`
+
+**basic plot events**
+* `plotenter`
+* `plotmove`
+* `plotleave`
+* `plotclick`
+* `plotdblclick`
+
+**tooltip events**
+* `tooltip:show`
+* `tooltip:hide`
+* `tooltip:change`
+
+Usages:
+```html
+<g2-vchart
+  ref="g2-vchart"
+  @click="onClick"
+  @tooltip:change="onTooltipChange"
+/>
+```
+```js
+onTooltipChange(evt) {
+  // handle evt
+}
+```
+
+For more details, see [G2's API - Events](https://antv.alipay.com/zh-cn/g2/3.x/api/chart.html#_%E4%BA%8B%E4%BB%B6)
+
+- [ ] any other events,like `shape*basic`, `components*basic` will be added soon~
 
 ## Local development
 
@@ -187,18 +253,22 @@ require('./facet/index');
 // interaction
 require('./interaction/index');
 ```
-- [ ] use `resize-detector`
+- [x] use `resize-detector`
 - [ ] add more examples
 - [ ] `run lint` before `git push`
 
 
 Version|File|Size|Gzipped
+---|---|---|---
 0.3.0 | dist/G2VChart.umd.min.js | 634.35 kb  | 176.48 kb
 0.3.0 | dist/G2VChart.umd.js     | 1536.26 kb | 326.48 kb
 
 
 === Tarball Details ===
 version:       0.3.0
+
 package size:  854.3 kB
+
 unpacked size: 3.9 MB
+
 total files:   22

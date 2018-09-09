@@ -1,3 +1,7 @@
+0.3.1
+* add `resize-detector`
+
+
 0.3.0
 * Fix usage in README
   * Add some plan

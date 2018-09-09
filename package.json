@@ -5,8 +5,9 @@
   "main": "lib/index.js",
   "scripts": {
     "dev": "cross-env NODE_ENV=development vue-cli-service serve --open --fix",
-    "build": "cross-env NODE_ENV=production vue-cli-service build --target lib --name G2VChart src/index.js",
-    "lint": "vue-cli-service lint"
+    "build": "cross-env NODE_ENV=production vue-cli-service build --target lib --name tmp src/index.js && rimraf lib/* && cp ./dist/tmp.umd.min.js ./lib/index.js && rimraf dist",
+    "lint": "vue-cli-service lint",
+    "pub": "sh ./publish.sh"
   },
   "keywords": [
     "G2",
@@ -19,15 +20,18 @@
     "url": "https://github.com/Me-Momo/g2-for-vue.git"
   },
   "dependencies": {
-    "@antv/g2": "^3.2.7"
+    "@antv/g2": "^3.2.7",
+    "debounce": "^1.2.0",
+    "resize-detector": "^0.1.9"
   },
   "devDependencies": {
-    "vue": "^2.5.17",
     "@vue/cli-plugin-babel": "^3.0.1",
     "@vue/cli-plugin-eslint": "^3.0.1",
     "@vue/cli-service": "^3.0.1",
     "@vue/eslint-config-standard": "^3.0.1",
     "cross-env": "^5.2.0",
+    "rimraf": "^2.6.2",
+    "vue": "^2.5.17",
     "vue-template-compiler": "^2.5.17"
   },
   "browserslist": [
