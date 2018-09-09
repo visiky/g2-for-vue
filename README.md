@@ -129,6 +129,7 @@ See more examples [here](https://github.com/Me-Momo/g2-for-vue/tree/master/demo/
 ### Props
 
 * `autoResize` (default: false)
+
     This prop indicates G2 Chart instance should be resized automatically whenever its root is resized
 
 * `plotCfg`
@@ -167,11 +168,24 @@ onResize() {
 
 ### Methods
 
-TODO
+* `downloadImage` (name: string)
 
-### Static Methods
+   图表导出功能，通过传入 name 来指定下载图片的文件名。
 
-TODO
+* `getDataURL`
+* `changeVisible`
+* `resize`
+* `clear`
+* `repaint`
+* `destroy`
+
+* `dispatchAction` (name: string, ...args: any[])
+   To see more actions support: [G2.Chart Methods](https://antv.alipay.com/zh-cn/g2/3.x/api/chart.html#_%E6%96%B9%E6%B3%95)
+   
+   **example**
+   ```js
+   this.vchart.dispatchAction('getXScale')
+   ```
 
 ### Events
 
@@ -194,6 +208,9 @@ G2VChart support the following events:
 * `plotleave`
 * `plotclick`
 * `plotdblclick`
+
+**resize event**
+* `resize`
 
 **tooltip events**
 * `tooltip:show`
@@ -256,19 +273,3 @@ require('./interaction/index');
 - [x] use `resize-detector`
 - [ ] add more examples
 - [ ] `run lint` before `git push`
-
-
-Version|File|Size|Gzipped
----|---|---|---
-0.3.0 | dist/G2VChart.umd.min.js | 634.35 kb  | 176.48 kb
-0.3.0 | dist/G2VChart.umd.js     | 1536.26 kb | 326.48 kb
-
-
-=== Tarball Details ===
-version:       0.3.0
-
-package size:  854.3 kB
-
-unpacked size: 3.9 MB
-
-total files:   22

@@ -7,7 +7,6 @@
       :chartData="Data"
       :createChart="createChart"
       :addGuide="addGuide"
-      @resize="onResize"
     />
     <div class='btn' @click="refresh">refresh</div>
   </div>
@@ -36,7 +35,8 @@ export default {
       typeMap: {
         OUT: '支出',
         IN: '收入'
-      }
+      },
+      vchart: null
     }
   },
   methods: {
@@ -72,12 +72,11 @@ export default {
         { month: '8月', value: Math.floor(Math.random() * 100) + 210 },
         { month: '9月', value: Math.floor(Math.random() * 100) + 680 }
       ]
-    },
-    onResize() {
-      const g2VChart = this.$refs['g2-vchart'];
-      console.log('onResize:width:%d, height:%d', g2VChart.width, g2VChart.height)
     }
-  }
+  },
+  mounted() {
+    this.vchart = this.$refs['g2-vchart'];
+  },
 }
 </script>
 <style>

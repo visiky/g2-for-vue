@@ -20,7 +20,7 @@ export default {
     // using the boxSize of $el
     autoResize: {
       type: Boolean,
-      default: false,
+      default: false
     },
     plotCfg: {
       type: Object,
@@ -45,10 +45,10 @@ export default {
 
   watch: {
     width: (newVal, oldVal) => {
-      return this.delegateMethod('changeWidth', newVal);
+      return this.delegateMethod('changeWidth', newVal)
     },
     height: (newVal, oldVal) => {
-      return this.delegateMethod('changeHeight', newVal);
+      return this.delegateMethod('changeHeight', newVal)
     }
   },
 
@@ -93,14 +93,38 @@ export default {
       return { width: this.$el.offsetWidth, height: this.$el.offsetHeight }
     },
     resize() {
-      const { width, height } = this.getBox();
-      return this.delegateMethod('changeSize', width, height);
+      const { width, height } = this.getBox()
+      return this.delegateMethod('changeSize', width, height)
+    },
+    clear () {
+      this.delegateMethod('clear')
+    },
+    repaint () {
+      this.delegateMethod('repaint')
+    },
+    destroy () {
+      if (this.autoResize) {
+        removeListener(this.$el, this.__resizeHandler)
+      }
+      this.delegateMethod('destroy')
+    },
+    changeData(...args) {
+      return this.delegateMethod('changeData', ...args)
+    },
+    changeVisible() {
+      return this.delegateMethod('changeVisible')
     },
     getDataURL () {
       return this.delegateMethod('toDataURL')
     },
     downloadImage(name) {
       return this.delegateMethod('downloadImage', name)
+    },
+    /**
+     * @param {String} name - action name
+     */
+    dispatchAction(name, ...args) {
+      return this.delegateMethod(name, ...args)
     },
     delegateMethod (name, ...args) {
       if (!this.chart) {
@@ -115,7 +139,7 @@ export default {
       return this.chart[method]()
     },
     init () {
-      const { width, height } = this.getBox();
+      const { width, height } = this.getBox()
       let chart = new G2.Chart({
         container: this.$el,
         height,
@@ -133,7 +157,7 @@ export default {
         this.__resizeHandler = debounce(() => {
           // expose a resize event
           this.$emit('resize')
-          this.resize();
+          this.resize()
         }, 200)
         addListener(this.$el, this.__resizeHandler)
       }
@@ -168,18 +192,6 @@ export default {
       })
 
       this.chart = chart
-    },
-    repaint () {
-      this.delegateMethod('repaint')
-    },
-    clear () {
-      this.delegateMethod('clear')
-    },
-    destroy () {
-      if (this.autoResize) {
-        removeListener(this.$el, this.__resizeHandler)
-      }
-      this.delegateMethod('destroy')
     },
     refresh () {
       if (this.chart) {
