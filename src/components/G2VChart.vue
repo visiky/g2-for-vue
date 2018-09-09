@@ -1,18 +1,36 @@
 
 <template>
-  <div class="g2-vchart"/>
+  <div class="g2-vchart" style="width: 100%; height: 100%"/>
 </template>
 <style>
-.g2-vchart {
-  width: 100%;
-  height: 100%;
-}
 </style>
 <script>
 import G2 from '@antv/g2'
 import { addListener, removeListener } from 'resize-detector'
 import debounce from 'debounce'
-import EVENTS from './Events.js'
+const EVENTS = [
+  // basic canvas events
+  'mousedown',
+  'mousemove',
+  'mouseleave',
+  'mouseup',
+  'click',
+  'dblclick',
+  'touchstart',
+  'touchmove',
+  'touchend',
+  // basic plot events
+  'plotenter',
+  'plotmove',
+  'plotleave',
+  'plotclick',
+  'plotdblclick',
+  // tooltip events
+  'tooltip:show',
+  'tooltip:hide',
+  'tooltip:change'
+  // TODO any other events,like shape*basic, components*basic
+]
 
 export default {
   props: {

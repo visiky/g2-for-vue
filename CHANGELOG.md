@@ -1,3 +1,7 @@
+0.3.5
+
+* fix the bug of extracting css file,using inline-style
+
 0.3.1
 * add `resize-detector`
 * add more `G2.Chart Methods` support

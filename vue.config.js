@@ -26,7 +26,6 @@ module.exports = {
     }
   },
   css: {
-    extract: false,
     loaderOptions: {
       // pass options to less-loader
       less: {
