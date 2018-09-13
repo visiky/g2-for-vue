@@ -1,3 +1,7 @@
+0.3.6
+
+* fix the problem thar not compile code to es5
+
 0.3.5
 
 * fix the bug of extracting css file,using inline-style

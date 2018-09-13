@@ -25,6 +25,23 @@ module.exports = {
       libraryExport: 'default'
     }
   },
+  // @see https://github.com/neutrinojs/webpack-chain#getting-started
+  chainWebpack: config => {
+    config.module
+      .rule('compile')
+      .test(/\.js$/)
+      .include
+      .add('src')
+      .add('node_modules/@antv')
+      .end()
+      .use('babel')
+      .loader('babel-loader')
+      .options({
+        presets: [
+          ['es2015', { modules: false }]
+        ]
+      })
+  },
   css: {
     loaderOptions: {
       // pass options to less-loader
